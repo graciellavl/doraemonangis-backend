@@ -27,4 +27,34 @@ router.route("/add").post(upload.single("storeimage"), (req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.route("/:id").get((req, res) => {
+  Store.findById(req.params.id)
+    .then((varian) => res.json(varian))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.route("/:id").delete((req, res) => {
+  Store.findByIdAndDelete(req.params.id)
+    .then(() => res.json("Store deleted"))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.route("/update/:id").post(upload.single("storeimage"), (req, res) => {
+  Store.findById(req.params.id)
+    .then((store) => {
+      store.storename = req.body.storename;
+      store.street = req.body.street;
+      store.kecamatan = req.body.kecamatan;
+      store.provinsi = req.body.provinsi;
+      if (req.file) {
+        store.storeimage = req.file.path;
+      }
+      store
+        .save()
+        .then(() => res.json("Store updated!"))
+        .catch((err) => res.status(400).json("Error: " + err));
+    })
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 module.exports = router;

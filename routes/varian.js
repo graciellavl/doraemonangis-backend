@@ -25,4 +25,32 @@ router.route("/add").post(upload.single("varianimage"), (req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.route("/:id").get((req, res) => {
+  Varian.findById(req.params.id)
+    .then((varian) => res.json(varian))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.route("/:id").delete((req, res) => {
+  Varian.findByIdAndDelete(req.params.id)
+    .then(() => res.json("Varian deleted"))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.route("/update/:id").post(upload.single("varianimage"), (req, res) => {
+  Varian.findById(req.params.id)
+    .then((varian) => {
+      varian.varianname = req.body.varianname;
+      varian.variandescription = req.body.variandescription;
+      if (req.file) {
+        varian.varianimage = req.file.path;
+      }
+      varian
+        .save()
+        .then(() => res.json("Varian updated!"))
+        .catch((err) => res.status(400).json("Error: " + err));
+    })
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 module.exports = router;
