@@ -27,4 +27,17 @@ router.route("/add").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.route("/update/:id").post((req, res) => {
+  Stock.findById(req.params.id)
+    .then((stock) => {
+      stock.storeId = req.body.storeId;
+      stock.stock = req.body.stock;
+      stock
+        .save()
+        .then(() => res.json("Stock updated"))
+        .catch((err) => res.status(400).json("Error: " + err));
+    })
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 module.exports = router;
