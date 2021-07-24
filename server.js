@@ -25,6 +25,7 @@ const stockRouter = require("./routes/stock");
 app.use("/store", storeRouter);
 app.use("/varian", varianRouter);
 app.use("/stock", stockRouter);
+app.use("/uploads", express.static('uploads'))
 
 app.listen(port, () => {
   console.log(`port ${port}`);
