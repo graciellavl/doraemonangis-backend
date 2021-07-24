@@ -18,6 +18,7 @@ const varianSchema = new Schema({
   },
   varianimage: {
     type: String,
+    required: true,
   },
 });
 

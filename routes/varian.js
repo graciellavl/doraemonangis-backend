@@ -1,18 +1,7 @@
 const router = require("express").Router();
 let Varian = require("../models/varian.model");
 
-const multer = require("multer");
-
-var storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads");
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.fieldname + "-" + Date.now());
-  },
-});
-
-var upload = multer({ storage: storage });
+const upload = require("../middleware/upload");
 
 router.route("/").get((req, res) => {
   Varian.find()
@@ -20,17 +9,15 @@ router.route("/").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/add").post(upload.single("image"), (req, res) => {
+router.route("/add").post(upload.single("varianimage"), (req, res) => {
   const newVarian = new Varian({
     varianname: req.body.varianname,
     variandescription: req.body.variandescription,
-    varianimage: {
-      data: fs.readFileSync(
-        path.join(__dirname + "/uploads/" + req.file.filename)
-      ),
-      contentType: "image/png",
-    },
   });
+
+  if (req.file) {
+    newVarian.varianimage = req.file.path;
+  }
 
   newVarian
     .save()
