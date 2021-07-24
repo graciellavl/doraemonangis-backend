@@ -13,6 +13,7 @@ router.route("/add").post(upload.single("varianimage"), (req, res) => {
   const newVarian = new Varian({
     varianname: req.body.varianname,
     variandescription: req.body.variandescription,
+    isvarianactive: req.body.isvarianactive,
   });
 
   if (req.file) {
@@ -42,6 +43,8 @@ router.route("/update/:id").post(upload.single("varianimage"), (req, res) => {
     .then((varian) => {
       varian.varianname = req.body.varianname;
       varian.variandescription = req.body.variandescription;
+      varian.isvarianactive = req.body.isvarianactive;
+
       if (req.file) {
         varian.varianimage = req.file.path;
       }

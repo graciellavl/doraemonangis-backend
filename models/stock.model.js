@@ -2,25 +2,24 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const stockSchema = new Schema(
-  {
-    storename: {
-      type: String,
-      required: true,
-    },
-    varianname: {
-      type: String,
-      required: true,
-    },
-    count: {
-      type: Number,
-      required: true,
-    }
+const stockSchema = new Schema({
+  storeId: {
+    type: Schema.Types.ObjectId,
+    ref: "Store",
+    unique: true,
+    required: true,
   },
-  {
-    timestamps: true,
-  }
-);
+  stock: [
+    {
+      varianId: {
+        type: Schema.Types.ObjectId,
+        ref: "Varian",
+        required: true,
+      },
+      count: { type: Number, default: 0 },
+    },
+  ],
+});
 
 const Stock = mongoose.model("Stock", stockSchema);
 

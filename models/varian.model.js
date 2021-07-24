@@ -20,6 +20,11 @@ const varianSchema = new Schema({
     type: String,
     required: true,
   },
+  isvarianactive: {
+    type: Boolean,
+    required: true,
+    default: true,
+  },
 });
 
 const Varian = mongoose.model("Varian", varianSchema);
