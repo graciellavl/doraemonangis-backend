@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon server.js",
+    "prod": "nodemon server.js", 
+    "run-dev": "docker-compose -f deployments/compose-prod/docker-compose.yml up --build -d",
+    "run-prod": "docker-compose -f deployments/compose-prod/docker-compose.yml up --build -d"
   },
-  "author": "",
+  "author": "graciellavl",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",

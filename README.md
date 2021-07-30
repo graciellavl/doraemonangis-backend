@@ -20,7 +20,6 @@ Spesifikasi lengkap: [Spesifikasi Seleksi Tim Laboratorium Programming 2019 Taha
 - **Front-End**: React.js
 - **Back-End**: Express.js
 - **Database**: MongoDB
-- **ODM**: Mongoose
 
 ## How to run? (Without Docker)
 
@@ -32,9 +31,9 @@ Pertama, install seluruh depedency yang digunakan terlebih dahulu menggunakan `y
 
 Setelah dependency berhasil diinstall, gunakan command `nodemon server.js` untuk memulai program dalam mode development. Server akan berjalan di `localhost:5000`.
 
-## How to run? (With Docker)
+## How to run? (With Docker) --> Error
 
-### `docker-compose up`
+### `yarn run-prod`
 Menjalankan seluruh instruksi yang diperlukan untuk membuild server
 
 
@@ -78,6 +77,10 @@ Folder ini berguna untuk merapikan request berdasarkan database.
 
 ### Uploads
 Folder ini berguna untuk menyimpan foto yang sudah diupload.
+
+## Depedency
+- Mongoose
+- Multer
 
 ## Related Information
 Repo Frontend: [doraemonangis-frontend](https://github.com/graciellavl/doraemonangis-frontend)
