@@ -48,6 +48,7 @@ router.route("/update/:id").post(upload.single("varianimage"), (req, res) => {
       if (req.file) {
         varian.varianimage = req.file.path;
       }
+      
       varian
         .save()
         .then(() => res.json("Varian updated!"))

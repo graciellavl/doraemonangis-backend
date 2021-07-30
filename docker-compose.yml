@@ -1,0 +1,30 @@
+# docker-compose.yml
+version: "3"
+services:
+  lph-backend-dev:
+    container_name: lph-backend-dev
+    volumes:
+      - ../../:/app:z
+    build:
+      context: ../../
+      dockerfile: builds/server-prod/Dockerfile
+    env_file: ../../builds/server-prod/.env
+    ports:
+      - 5000:5000
+    networks:
+      - dbconnect
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+  mongodb:
+    container_name: mongodb-dev
+    build: ../../builds/database-prod
+    env_file: ../../builds/database-prod/.env
+    ports:
+      - 27017:27017
+    networks:
+      - dbconnect
+    restart: unless-stopped
+  networks:
+    dbconnect:
+      driver: bridge

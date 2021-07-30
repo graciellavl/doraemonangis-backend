@@ -4,16 +4,14 @@ const Schema = mongoose.Schema;
 
 const stockSchema = new Schema({
   storeId: {
-    type: Schema.Types.ObjectId,
-    ref: "Store",
+    type: String,
     unique: true,
     required: true,
   },
   stock: [
     {
       varianId: {
-        type: Schema.Types.ObjectId,
-        ref: "Varian",
+        type: String,
         required: true,
       },
       count: { type: Number, default: 0 },

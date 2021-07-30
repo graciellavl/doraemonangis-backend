@@ -11,7 +11,14 @@ router.route("/").get((req, res) => {
 router.route("/:id").get((req, res) => {
   Stock.findById(req.params.id)
     .populate()
-    .then((varian) => res.json(varian))
+    .then((stock) => res.json(stock))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.route("/details/:id").get((req, res) => {
+  console.log(req);
+  Stock.find({ storeId: req.params.id })
+    .then((stock) => res.json(stock))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
